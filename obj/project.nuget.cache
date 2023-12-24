@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6ELOe1BIy4sYcpAX6frZZemnxzUT0RBClLmV3QwiqB04LzdkC6FVOCJ4JsJEU6XBetdX1oCgxNkEq0oMtkSD+A==",
+  "dgSpecHash": "tFkYk7yBquxX2HgrGCEfHoMlLjysJUGYimL9HYzPZxcvM3UDHF/6QmuoJ8OdCS0ZNfKVGZsdEKbsCUprcarpHQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Daniel\\Documents\\GitHub\\FolderInventorySmat\\Backend\\InventorySmart\\InventorySmart.csproj",
+  "projectFilePath": "C:\\Users\\Daniel\\Documents\\Projects\\InventorySmartBackend\\InventorySmart.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Daniel\\.nuget\\packages\\dapper\\2.0.35\\dapper.2.0.35.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\dapper.oracle\\2.0.3\\dapper.oracle.2.0.3.nupkg.sha512",

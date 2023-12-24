@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Daniel\\Documents\\GitHub\\FolderInventorySmat\\Backend\\InventorySmart\\InventorySmart.csproj": {}
+    "C:\\Users\\Daniel\\Documents\\Projects\\InventorySmartBackend\\InventorySmart.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Daniel\\Documents\\GitHub\\FolderInventorySmat\\Backend\\InventorySmart\\InventorySmart.csproj": {
+    "C:\\Users\\Daniel\\Documents\\Projects\\InventorySmartBackend\\InventorySmart.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Daniel\\Documents\\GitHub\\FolderInventorySmat\\Backend\\InventorySmart\\InventorySmart.csproj",
+        "projectUniqueName": "C:\\Users\\Daniel\\Documents\\Projects\\InventorySmartBackend\\InventorySmart.csproj",
         "projectName": "InventorySmart",
-        "projectPath": "C:\\Users\\Daniel\\Documents\\GitHub\\FolderInventorySmat\\Backend\\InventorySmart\\InventorySmart.csproj",
+        "projectPath": "C:\\Users\\Daniel\\Documents\\Projects\\InventorySmartBackend\\InventorySmart.csproj",
         "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Daniel\\Documents\\GitHub\\FolderInventorySmat\\Backend\\InventorySmart\\obj\\",
+        "outputPath": "C:\\Users\\Daniel\\Documents\\Projects\\InventorySmartBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",

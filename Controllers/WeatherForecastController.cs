@@ -21,8 +21,8 @@ namespace InventorySmart.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IActionResult Get()
         {
-            var name = _configuration["OracleInventoryUser"];
-            _logger.LogInformation("Environment variable value: {Name}", name);
+            var name = _configuration["OracleInventoryConecction"];
+            _logger.LogInformation("Environment variable value:", name);
 
             if (!string.IsNullOrEmpty(name))
             {
