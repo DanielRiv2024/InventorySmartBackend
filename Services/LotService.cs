@@ -33,51 +33,73 @@ namespace InventorySmart.Services
             }
         }
 
-        public bool DeleteLot(int id)
+        public async Task<bool> DeleteLot(int lotId)
         {
-            throw new NotImplementedException();
+            using (var connection = await _connectionManager.OpenConnectionAsync())
+            {
+                var parameters = new OracleDynamicParameters();
+                parameters.Add("p_LotId", lotId, OracleMappingType.Decimal, ParameterDirection.Input);
+
+                var result = await connection.ExecuteAsync("DeleteLot", parameters, commandType: CommandType.StoredProcedure);
+
+                return result > 0;
+            }
+        }
+
+        public async Task<List<Lot>> GetLotsByProductId(int productId)
+        {
+            using (var connection = await _connectionManager.OpenConnectionAsync())
+            {
+                var parameters = new OracleDynamicParameters();
+                parameters.Add("p_ProductId", productId, OracleMappingType.Decimal, ParameterDirection.Input);
+                parameters.Add("p_Lots", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
+
+                var result = await connection.QueryAsync<Lot>("GetLotsByProductId", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
         }
 
         public async Task<List<Lot>> GetAllLots()
         {
             using (var connection = await _connectionManager.OpenConnectionAsync())
-            {
-
-                var result = await connection.QueryAsync<dynamic>("SELECT * FROM LOT");
-                var lotList = result.ToList();
-
-                Console.WriteLine("Lista de Lotes:");
-                foreach (var lot in lotList)
-                {
-                    Console.WriteLine($"Lote: {lot}");
-                }
-
+            { 
                 var results = await connection.QueryAsync<Lot>("SELECT * FROM LOT");
                 return results.ToList();
             }
         }
 
-        public Task<Lot> GetLotById(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<Lot> UpdateLot(Lot lot)
         {
             using (var connection = await _connectionManager.OpenConnectionAsync())
             {
                 var parameters = new OracleDynamicParameters();
-                parameters.Add("p_LotId", lot.idLot, (OracleMappingType?)DbType.Decimal, ParameterDirection.Input);
-                parameters.Add("p_StartDate", lot.startTime, (OracleMappingType?)DbType.Date, ParameterDirection.Input);
-                parameters.Add("p_SaleDate", lot.saleTime, (OracleMappingType?)DbType.Date, ParameterDirection.Input);
-                parameters.Add("p_Quanty", lot.quanty, (OracleMappingType?)DbType.Decimal, ParameterDirection.Input);
-                parameters.Add("p_UnitPrice", lot.unitPrice, (OracleMappingType?)DbType.Decimal, ParameterDirection.Input);
-                parameters.Add("p_FinalPrice", lot.finalPrice, (OracleMappingType?)DbType.Decimal, ParameterDirection.Input);
-                parameters.Add("p_UpdatedBy", lot.updateBy, (OracleMappingType?)DbType.String, ParameterDirection.Input);
+                parameters.Add("p_LotId", lot.idLot, OracleMappingType.Decimal, ParameterDirection.Input);
+                parameters.Add("p_StartDate", lot.startTime, OracleMappingType.Date, ParameterDirection.Input);
+                parameters.Add("p_SaleDate", lot.saleTime, OracleMappingType.Date, ParameterDirection.Input);
+                parameters.Add("p_Quanty", lot.quanty, OracleMappingType.Decimal, ParameterDirection.Input);
+                parameters.Add("p_UnitPrice", lot.unitPrice, OracleMappingType.Decimal, ParameterDirection.Input);
+                parameters.Add("p_FinalPrice", lot.finalPrice, OracleMappingType.Decimal, ParameterDirection.Input);
+                parameters.Add("p_UpdatedBy", lot.updateBy, OracleMappingType.Varchar2, ParameterDirection.Input);
 
                 var result = await connection.ExecuteAsync("UpdateLot", parameters, commandType: CommandType.StoredProcedure);
 
                 return lot;
+            }
+        }
+
+        public async Task<Lot> GetLotById(int lotId)
+        {
+            using (var connection = await _connectionManager.OpenConnectionAsync())
+            {
+                var parameters = new OracleDynamicParameters();
+                parameters.Add("p_LotId", lotId, OracleMappingType.Decimal, ParameterDirection.Input);
+                parameters.Add("p_Lot", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
+
+                var result = await connection.QueryFirstOrDefaultAsync<Lot>("GetLotById", parameters, commandType: CommandType.StoredProcedure);
+
+                return result;
             }
         }
 

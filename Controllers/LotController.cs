@@ -32,6 +32,22 @@ namespace InventorySmart.Controllers
                 }
             }
         }
+        [HttpGet("GetLotsByIdProduct/{idProduct}")]
+        public IActionResult GetByIdProduct(int idProduct)
+        {
+            try
+            {
+                List<Lot> lots = _lotService.GetLotsByProductId(idProduct).Result;
+
+                return Ok(lots);
+            }
+            catch (Exception ex)
+            {
+                {
+                    return BadRequest($"Error en la conexión: {ex.Message}");
+                }
+            }
+        }
         [HttpPost("CreateLot")]
         public async Task<IActionResult> CreateLot([FromBody] Lot lot)
         {
@@ -59,5 +75,53 @@ namespace InventorySmart.Controllers
                 return BadRequest($"Error al crear el lote: {ex.Message}");
             }
         }
+
+        [HttpDelete("DeleteLot/{lotId}")]
+        public async Task<IActionResult> DeleteLot(int lotId)
+        {
+            try
+            {
+
+                bool isDeleted = await _lotService.DeleteLot(lotId);
+
+                if (isDeleted)
+                {
+                    return Ok($"Lote con ID {lotId} eliminado correctamente.");
+                }
+                else
+                {
+                    return NotFound($"No se encontró el lote con ID {lotId}.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error al eliminar el lote: {ex.Message}");
+            }
+        }
+
+        [HttpGet("GetLotById/{lotId}")]
+        public IActionResult GetLotById(int lotId)
+        {
+            try
+            {
+                Lot lot = _lotService.GetLotById(lotId).Result;
+
+                if (lot != null)
+                {
+                    return Ok(lot);
+                }
+                else
+                {
+                    return NotFound($"No se encontró el lote con ID {lotId}.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error en la conexión: {ex.Message}");
+            }
+        }
+
     }
+
+    
 }
